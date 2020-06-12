@@ -17,9 +17,10 @@ namespace api.Modelos
 
         //Forma Correcta
         protected virtual void OnModelCreating(ModelBuilder builder){
-            builder.Entity<Blog>()
-            .ToTable("Blogs")
-            .HasKey(x=>x.Id);
+            //Fluent API Ef Core
+            builder.Entity<Blog>().ToTable("Blogs");
+            builder.Entity<Blog>().HasKey(Blog => Blog.Id);
+            builder.Entity<Blog>().Property(Blog => Blog.Id).ValueGeneratedOnAdd(); //Autoincrementar
             builder.Entity<Blog>().Property(Blog => Blog.Nombre).HasMaxLength(30);
             
             builder.Entity<Blog>().HasData(
