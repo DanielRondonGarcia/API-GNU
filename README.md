@@ -4,49 +4,61 @@
 __En este apartado, vamos a analizar el CRUD de la API__
 
 Como prueba, utilizamos la aplicación, [postman].
-------
 
 * __Ver__
-* * * *
+ 
 ![Función Ver](/Ver.PNG)
 Probamos en Postman:
 ![Postman Ver](/VerPostman.PNG)
+~~~
 Se hace una peticion GET para hacer una consulta a la base de datos.
 Tambien de puede agregar al final de la URL el ID.
+~~~
 Por ejemplo: https://localhost:5001/api/Blogs/1
 -----------
 * __Crear__
-* * * *
+
 ![Función Crear](/Crear.PNG)
+~~~
 El agregar utiliza la petición POST.
 Probamos en Postman:
+~~~
 ![Postman Crear](/CrearPostman.PNG)
+~~~
 Para hacer el guardado en postman, se usa el formato JSON con la misma estructura que se está utilizando
+~~~
 `{"id": 3,"nombre": "Blog del profesor","autor": "William"}`
 
 ------
 * __Eliminar__
-* * * *
+
 ![Función Eliminar](/Eliminar.PNG)
+~~~
 El agregar utiliza la petición DELETE.
 Probamos en Postman:
+~~~
 ![Postman Eliminar](/EliminarPostman.PNG)
+~~~
 Definimos al final de la URL el ID que se desea eliminar de la base de datos.
 Por ejemplo: https://localhost:5001/api/Blogs/1
 Para verificar, solo es ir a la funcion ver que tiene como petición GET.
+~~~
 ![Postman Eliminar](/EliminarPostmanGet.PNG)
+~~~
 Podemos ver que ya no está en la base de datos, las tablas relacionadas con el ID __"1"__
-
+~~~
 ------
 * __Editar__
-  * * *
-![Función Ver](/Editar.PNG)
+  
+![Función Editar](/Editar.PNG)
+~~~
 El eliminar se usa con la petición PUT.
 Probamos en Postman:
-![Postman Ver](/EditarPostman.PNG)
-Se hace una peticion GET para hacer una consulta a la base de datos.
-Tambien de puede agregar al final de la URL el ID.
-
+~~~
+![Postman Editar](/EditarPostman.PNG)
+~~~
+Aún se sigue trabajando en el editar
+~~~
 
 
 
