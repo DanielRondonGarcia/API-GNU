@@ -4,8 +4,10 @@
 __En este apartado, vamos a analizar el CRUD de la API__
 
 Como prueba, utilizamos la aplicación, [postman].
+------
 
 * __Ver__
+* * * *
 ![Función Ver](/Ver.PNG)
 Probamos en Postman:
 ![Postman Ver](/VerPostman.PNG)
@@ -14,6 +16,7 @@ Tambien de puede agregar al final de la URL el ID.
 Por ejemplo: https://localhost:5001/api/Blogs/1
 -----------
 * __Crear__
+* * * *
 ![Función Crear](/Crear.PNG)
 El agregar utiliza la petición POST.
 Probamos en Postman:
@@ -23,6 +26,7 @@ Para hacer el guardado en postman, se usa el formato JSON con la misma estructur
 
 ------
 * __Eliminar__
+* * * *
 ![Función Eliminar](/Eliminar.PNG)
 El agregar utiliza la petición DELETE.
 Probamos en Postman:
@@ -35,6 +39,7 @@ Podemos ver que ya no está en la base de datos, las tablas relacionadas con el 
 
 ------
 * __Editar__
+  * * *
 ![Función Ver](/Editar.PNG)
 El eliminar se usa con la petición PUT.
 Probamos en Postman:
