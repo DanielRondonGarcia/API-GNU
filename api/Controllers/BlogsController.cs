@@ -39,10 +39,10 @@ namespace api.Controllers
             return Ok(resultado);
         }
         
+        //Agregar
        [HttpPost]
-       public IActionResult crearBlog([FromBody] Blog objBlog){
-           //validar si existe, retornar un httpcode
-            if(!ModelState.IsValid){
+       public IActionResult crearBlog([FromBody] Blog objBlog){           
+            if(!ModelState.IsValid){ //validar si existe, retornar un httpcode
                 return BadRequest();
             }
            db.Blogs.Add(objBlog);
@@ -51,6 +51,7 @@ namespace api.Controllers
            return Ok();
             
         }
+
         //http://localhost:5000/api/Blogs/1
         //[HttpDelete("{id}")]
         [Route("~/api/Blogs/{id}")]
