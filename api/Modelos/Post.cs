@@ -3,7 +3,7 @@ using System;
 
 namespace api.Modelos 
 {
-    
+    //[Table("Posts")]
     public class Post
     {
         [Key]

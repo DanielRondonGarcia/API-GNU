@@ -22,68 +22,65 @@ namespace api.Controllers
         }
 
         [HttpGet] //Lista de objetos
-        public ActionResult<IEnumerable<Blog>> Get()
-        {
+        public ActionResult<IEnumerable<Blog>> Get(){
             //return new string[] { "value1", "value2" };
             var lista = db.Blogs.ToList();
             return lista;
         }
 
         //localhost:4564/api/Blogs/1
-        // [HttpGet("{id}")] // Un objeto con identificado (llave id)
-        // public ActionResult<string> GetBlogs(int id)
-        // {
+        [HttpGet("{id}")] // Un objeto con identificado (llave id)
+        public ActionResult<Blog> GetBlogs([FromRoute]int id){
 
-        //    // var resultado = db.Blogs.
-        //    return "valor";
-        // }
-
-        //localhost:5000/api/Blogs/1
-        [HttpGet("{categoriaId}")] // Un objeto con identificado (llave id)
-        public ActionResult<Blog> GetBlogs(int categoriaId)
-        {
-            Blog resultado = db.Blogs.Find(categoriaId);
-
-            if (resultado == null)
-            {
+            Blog resultado = db.Blogs.Find(id);
+            if(resultado == null){
                 return NotFound(); //404
             }
             return Ok(resultado);
         }
-
-        [HttpPost]
-        public async Task<ActionResult> CrearBlog([FromBody] Blog objetoBlog)
-        {
-            if (ModelState.IsValid) // saber si los datos que llego está a acorde a lo que necesitamos
-            {
-                //Validación. para mapearlo en un codigo http acorde a ello            
-            }
-
-            var guardado = db.Blogs.Add(objetoBlog);
-            await db.SaveChangesAsync();
-
-            return CreatedAtAction("GetBlogs", new { categoriaId = objetoBlog.Id });
-        }
-
-        [HttpPut("id")]
-        public async Task<ActionResult> EditarBlog([FromBody] int id, [FromBody] Blog objetoBlog)
-        {
-            if (!ModelState.IsValid) // Controla que sea el tipo de dato que se va a manejar
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != objetoBlog.Id) // Controla de que nadie externo haya manipulado los datos
-            {
+        
+       [HttpPost]
+       public IActionResult crearBlog([FromBody] Blog objBlog){
+           //validar si existe, retornar un httpcode
+            if(!ModelState.IsValid){
                 return BadRequest();
             }
+           db.Blogs.Add(objBlog);
+           db.SaveChanges();//commit sobre la DB
 
-            db.Entry(objetoBlog).State = EntityState.Modified;
-            db.Update(objetoBlog);
-            await db.SaveChangesAsync();
-
-            return Redirect("Get"); //queda pendiente este return
+           return Ok();
+            
         }
-
+        //http://localhost:5000/api/Blogs/1
+        //[HttpDelete("{id}")]
+        [Route("~/api/Blogs/{id}")]
+        [HttpDelete]
+        public ActionResult eliminarDatos(int id){
+            Blog existe = db.Blogs.Find(id);
+            if(existe == null){
+                return NotFound(); //404
+            }
+            db.Blogs.Remove(existe);
+            db.SaveChanges();
+            return Ok();
+        }
+        [HttpPut("{id}")]
+        public ActionResult editarBlog([FromRoute] int id, [FromBody] Blog objBlog){
+            if(!ModelState.IsValid){
+                return BadRequest(ModelState);
+            }
+            if(id != objBlog.Id){
+                return BadRequest(ModelState);
+            }
+            Blog existe = db.Blogs.Find(id);
+            if(existe == null){
+                return NotFound(); //404
+            }
+            db.Entry(id).State = EntityState.Modified;
+            db.Update(objBlog);
+            db.SaveChanges();
+            return Ok();
+        }
     }
+
 }
